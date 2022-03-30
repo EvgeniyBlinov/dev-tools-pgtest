@@ -1,0 +1,22 @@
+version: "2"
+
+services:
+  test:
+    build:
+      context: .
+    links:
+      - postgres
+    environment:
+      POSTGRES_HOST: "postgres"
+      POSTGRES_DB: "postgres"
+      POSTGRES_USER: "admin"
+      POSTGRES_PASSWORD: "password"
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:13.3
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: "password"
+      POSTGRES_USER: "admin"

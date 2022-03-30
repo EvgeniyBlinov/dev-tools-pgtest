@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pgtest
+  labels:
+    app: pgtest
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pgtest
+  template:
+    metadata:
+      labels:
+        app: pgtest
+    spec:
+      #imagePullSecrets:
+        #- name: registries
+      containers:
+      - name: pgtest
+        image: pgtest:latest
+        ## DEBUG
+        #command: ["/usr/bin/tail"]
+        #args: ["-f", "/dev/null"]
+        env:
+          - name: POSTGRES_HOST
+            value: postgres
+          - name: POSTGRES_DB
+            value: postgres
+          - name: POSTGRES_USER
+            value: postgres
+          - name: POSTGRES_PASSWORD
+            value: postgres
+          - name: PGPORT
+            value: 5432
